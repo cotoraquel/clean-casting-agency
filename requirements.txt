@@ -19,5 +19,5 @@ six==1.16.0
 SQLAlchemy==1.4.18
 Werkzeug==2.0.1
 
-psycopg[c]; sys_platform == "linux"
-psycopg[binary]; sys_platform != "linux"
+#psycopg[c]; sys_platform == "linux"
+#psycopg[binary]; sys_platform != "linux"
