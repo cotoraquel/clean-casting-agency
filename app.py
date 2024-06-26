@@ -9,7 +9,7 @@ from datetime import datetime
 
 def create_app(test_config=None):
     app = Flask(__name__)
-    app.secret_key = os.getenv('APP_SECRET_KEY', 'default_secret_key') 
+    app.secret_key = os.environ.get('APP_SECRET_KEY', 'default_secret_key') 
     setup_db(app)
     CORS(app)
 

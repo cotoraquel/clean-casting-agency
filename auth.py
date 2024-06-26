@@ -4,15 +4,12 @@ from functools import wraps
 from flask import request, abort
 from jose import jwt
 from urllib.request import urlopen
-from dotenv import load_dotenv
-
-load_dotenv()
 
 AUTH0_DOMAIN = 'cotoraquel.us.auth0.com'  # Replace with your Auth0 domain
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'https://localhost:3000'  # Replace with your API audience
-CLIENT_ID= os.getenv('CLIENT_ID')
-CLIENT_SECRET= os.getenv('CLIENT_SECRET')
+CLIENT_ID= os.environ.get('CLIENT_ID')
+CLIENT_SECRET= os.environ.get('CLIENT_SECRET')
 
 class AuthError(Exception):
     def __init__(self, error, status_code):

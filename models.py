@@ -1,9 +1,8 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from dotenv import load_dotenv
-load_dotenv()
-database_path = os.getenv('DATABASE_URL', 'postgresql://postgres:abc123@localhost:5432/casting_agency_redux')
+
+database_path = os.environ.get('DATABASE_URL', 'postgresql://postgres:abc123@localhost:5432/casting_agency_redux')
 db = SQLAlchemy()
 
 def setup_db(app, database_path=database_path):
