@@ -31,7 +31,7 @@ def create_app(test_config=None):
                 abort(e.code)
 
     @app.route('/movies', methods=['GET'])
-    @requires_auth('read:movies')
+    # @requires_auth('read:movies')
     def get_movies():
         try:
             movies = Movie.query.all()
