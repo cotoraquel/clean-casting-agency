@@ -2,7 +2,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-database_path = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+database_path = os.environ.get('DATABASE_URL').replace("postgres://", "postgresql://", 1)
 db = SQLAlchemy()
 
 def setup_db(app, database_path=database_path):

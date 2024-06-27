@@ -10,7 +10,7 @@ itsdangerous==2.0.1
 Jinja2==3.0.1
 Mako==1.1.4
 MarkupSafe==2.0.1
-psycopg2-binary==2.9.1
+# psycopg2-binary==2.9.1
 python-dateutil==2.8.1
 python-editor==1.0.4
 python-jose==3.3.0
@@ -19,5 +19,5 @@ SQLAlchemy==1.4.18
 Werkzeug==2.0.1
 
 
-psycopg[c]; sys_platform == "linux"
-psycopg[binary]; sys_platform != "linux"
+#psycopg[c]; sys_platform == "linux"
+#psycopg[binary]; sys_platform != "linux"
