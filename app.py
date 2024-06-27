@@ -31,7 +31,7 @@ def create_app(test_config=None):
                 abort(e.code)
 
     @app.route('/movies', methods=['GET'])
-    # @requires_auth('read:movies')
+    @requires_auth('read:movies')
     def get_movies():
         try:
             movies = Movie.query.all()
@@ -55,7 +55,6 @@ def create_app(test_config=None):
                 'delete': actor_id
             })
         except Exception as e:
-            print(f"Error: {e}")
             abort(500, description="Internal server error.")
 
     @app.route('/movies/<int:movie_id>', methods=['DELETE'])
@@ -71,7 +70,6 @@ def create_app(test_config=None):
                 'delete': movie_id
             })
         except Exception as e:
-            print(f"Error: {e}")
             abort(500, description="Internal server error.")
 
     @app.route('/actors', methods=['POST'])
@@ -164,7 +162,6 @@ def create_app(test_config=None):
 
     @app.errorhandler(AuthError)
     def handle_auth_error(ex):
-        print(f'{ex}')
         response = jsonify(ex.error)
         response.status_code = ex.status_code
         return response
