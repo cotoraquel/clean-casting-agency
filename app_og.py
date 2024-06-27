@@ -9,27 +9,29 @@ from datetime import datetime
 
 def create_app(test_config=None):
     app = Flask(__name__)
-    app.secret_key = os.environ.get('APP_SECRET_KEY', 'default_secret_key')
+    app.secret_key = os.environ.get('APP_SECRET_KEY', 'default_secret_key') 
     setup_db(app)
     CORS(app)
 
     Migrate(app, db)  # Initialize Flask-Migrate
 
+    def is_not_integer(value):
+        return not isinstance(value, int)
+
     @app.route('/actors', methods=['GET'])
     @requires_auth('read:actors')
     def get_actors():
-        try:
-            actors = Actor.query.all()
-            return jsonify({
-                'success': True,
-                'actors': [actor.format() for actor in actors]
-            })
-        except Exception as e:
-            print(f"Error: {e}")
-            abort(500, description=str(e))
+            try:
+                actors = Actor.query.all()
+                return jsonify({
+                    'success': True,
+                    'actors': [actor.format() for actor in actors]
+                })
+            except Exception as e: 
+                abort(e.code)
 
     @app.route('/movies', methods=['GET'])
-    @requires_auth('read:movies')
+    # @requires_auth('read:movies')
     def get_movies():
         try:
             movies = Movie.query.all()
@@ -37,9 +39,8 @@ def create_app(test_config=None):
                 'success': True,
                 'movies': [movie.format() for movie in movies]
             })
-        except Exception as e:
-            print(f"Error: {e}")
-            abort(500, description=str(e))
+        except Exception as e: 
+            abort(e.code)
 
     @app.route('/actors/<int:actor_id>', methods=['DELETE'])
     @requires_auth('delete:actors')
@@ -91,9 +92,8 @@ def create_app(test_config=None):
                 'success': True,
                 'actor': actor.format()
             })
-        except Exception as e:
-            print(f"Error: {e}")
-            abort(500, description=str(e))
+        except Exception as e: 
+            abort(e.code)
 
     @app.route('/movies', methods=['POST'])
     @requires_auth('post:movies')
@@ -113,8 +113,7 @@ def create_app(test_config=None):
                 'movie': movie.format()
             })
         except Exception as e:
-            print(f"Error: {e}")
-            abort(500, description=str(e))
+            abort(e.code)
 
     @app.route('/actors/<int:actor_id>', methods=['PATCH'])
     @requires_auth('patch:actors')
@@ -137,9 +136,8 @@ def create_app(test_config=None):
                 'success': True,
                 'actor': actor.format()
             })
-        except Exception as e:
-            print(f"Error: {e}")
-            abort(500, description=str(e))
+        except Exception as e: 
+            abort(e.code)
 
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
     @requires_auth('patch:movies')
@@ -160,9 +158,9 @@ def create_app(test_config=None):
                 'success': True,
                 'movie': movie.format()
             })
-        except Exception as e:
-            print(f"Error: {e}")
-            abort(500, description=str(e))
+        except Exception as e: 
+            abort(e.code)
+            
 
     @app.errorhandler(AuthError)
     def handle_auth_error(ex):
