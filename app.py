@@ -13,7 +13,7 @@ def create_app(test_config=None):
     setup_db(app)
     CORS(app)
 
-    migrate = Migrate(app, db)  # Initialize Flask-Migrate
+    Migrate(app, db)  # Initialize Flask-Migrate
 
     def is_not_integer(value):
         return not isinstance(value, int)
