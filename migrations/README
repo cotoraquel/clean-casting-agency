@@ -1,1 +1,8 @@
-Generic single-database configuration.
+# Casting Agency
+
+## Setup
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/casting-agency.git
+   cd casting-agency
